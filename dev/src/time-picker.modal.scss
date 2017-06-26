@@ -1,0 +1,445 @@
+
+$numberSize: 40px;
+$clockSize: 15em;
+$clockValuesInitDuration: 1s;
+$revolutionDuration: 0.5s;
+$selectedColor: darkcyan;
+@function clockTimePos12($time){
+    @if $time < 3{
+        @return rotate( ($time - 3) * 30deg + 360deg) translateX($clockSize/2 - 1em) rotate(($time - 3) * -30deg - 360deg);
+    }
+    @else {
+        @return rotate( ($time - 1) * 30deg + 300deg) translateX($clockSize/2 - 1em) rotate(($time - 1) * -30deg - 300deg);
+    }
+}
+@function clockTimePos24($time){
+    @if $time < 6{
+        @return rotate( ($time - 6) * 15deg + 360deg) translateX($clockSize/2 - 1em) rotate(($time - 6) * -15deg - 360deg);
+    }
+    @else {
+        @return rotate( ($time - 2) * 15deg + 300deg) translateX($clockSize/2 - 1em) rotate(($time - 2) * -15deg - 300deg);
+    }
+}
+@function clockTimePos60($time){
+    @if $time < 15{
+        @return rotate( ($time - 15) * 6deg + 360deg) translateX($clockSize/2 - 1em) rotate(($time - 15) * -6deg - 360deg);
+    }
+    @else {
+        @return rotate( ($time - 5) * 6deg + 300deg) translateX($clockSize/2 - 1em) rotate(($time - 5) * -6deg - 300deg);
+    }
+}
+:host{
+    .time-picker-content{
+        overflow: hidden;
+    }
+    .time-picker-header{
+        margin: 0;
+        text-align: center;
+        width: calc(100% + 48px);
+        margin-left: -24px;
+        margin-top: -24px;
+        background-color: #4496c5;
+        padding: 24px;
+        font-size:45px;
+        .current-value{
+            font-size: 50px;
+            color: white;
+        }
+    }
+    .month-picker {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: $clockSize;
+        width: $clockSize;
+        font-size: $numberSize;
+        .month-button-wrapper {
+            height: calc(#{$clockSize}/5);
+            text-align:center;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            .month-button{
+                border-radius: 40%;
+                height: 100%;
+                width: 100%;
+                font-size: 1em;
+                padding: 0;
+
+            }
+        }
+    }
+    .abbr-picker {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: $clockSize;
+        width: $clockSize;
+        font-size: $numberSize;
+        .abbr-button-wrapper {
+            height: calc(#{$clockSize}/5);
+            text-align:center;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            .abbr-button{
+                border-radius: 40%;
+                height: 100%;
+                width: 100%;
+                font-size: 1em;
+                padding: 0;
+
+            }
+        }
+    }
+    .number-pad {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: $clockSize;
+        width: $clockSize;
+        font-size: $numberSize;
+        .number-pad-button-container{
+            border: 1px solid grey;
+            width: 100%;
+            .number-pad-button-wrapper {
+                height: calc(#{$clockSize}/5);
+                text-align:center;
+                padding: 0;
+                border: 1px solid grey;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+                .number-pad-button{
+                    height: 100%;
+                    width: 100%;
+                    font-size: 4vh;
+                    padding: 0;
+
+                }
+            }
+        }
+    }
+    .actions {
+        display: flex;
+        justify-content: flex-end;
+    }
+    .clock{
+        border-radius: 50%;
+        background-color: #F5F5F5;
+        padding-bottom: calc(100%);
+        width: $clockSize;
+        min-width: $clockSize;
+        min-height: $clockSize;
+        max-width: 95%;
+        position: relative;
+        font-size: $numberSize;
+        .hand-pointer{
+            position: absolute;
+            left: 100%;
+            top: -0.73em;
+            color:$selectedColor;
+        }
+        .hand-inner{
+            position:relative;
+            width:100%;
+            height: 100%;
+        }
+        .hand{
+            background-color: $selectedColor;
+            width: $clockSize / 2 - 3em;
+            height: 2px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform-origin: 0px 0px;
+            transform: rotate(270deg);
+        }
+        .tick{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 1.0em;
+            width: 1.0em;
+            position: absolute;
+            left: calc(50% - 0.5em);
+            top: calc(50% - 0.5em);
+            cursor: pointer;
+            .tick-inner{
+                display:flex;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                height: 0.7em;
+                width: 1.0em;
+                border-radius: 50%;
+                div{
+                    height: 0.1em;
+                    background-color: $selectedColor;
+                    width: 0.5em;
+                }
+            }
+        }
+        
+        .hand.red{
+            background-color: red;
+        }
+        .center-dot{
+            background-color: $selectedColor;
+            width: .5em;
+            height: .5em;
+            position: absolute;
+            left: calc(50% - 0.25em);
+            top: calc(50% - 0.25em);
+            border-radius: 50%;
+        }
+        .selected{
+            background-color: $selectedColor;
+        }
+        .hour{
+            display: flex;
+            align-items: center;
+            position: absolute;
+            border-radius: 50%;
+            height:1em;
+            width:1em;
+            cursor: pointer;
+            left: calc(50% - 0.5em);
+            top: calc(50% - 0.5em);
+            z-index: 1;
+        }
+        .hour-inner{
+            font-size: calc(1em * 0.9);
+            width: 100%;
+            text-align: center;
+            padding: 0;
+        }
+        .movingBackground{
+            background-color:darkcyan;
+            border-radius: 50%;
+            height:2em;
+            left: calc(50% - 1em);
+            top: calc(50% - 1em);
+            transform: clockTimePos12(12);
+        }
+        //TICKS
+        @for $i from 0 through 59 {
+            .tick-#{$i}{ transform: rotate($i * 6deg - 90deg); }
+        }
+        //INITHAND
+        @for $i from 1 through 12 {
+            .initHand-#{$i}{
+                animation: initHand#{$i};
+                animation-fill-mode: forwards;
+                animation-duration: $clockValuesInitDuration;
+                animation-delay: $clockValuesInitDuration;
+            }
+        }
+        //INIT24HAND
+        @for $i from 0 through 23 {
+            .init24Hand-#{$i}{
+                animation: init24Hand#{$i};
+                animation-fill-mode: forwards;
+                animation-duration: $clockValuesInitDuration;
+                animation-delay: $clockValuesInitDuration;
+            }
+        }
+        //INIT60HAND
+        @for $i from 0 through 59 {
+            .init60Hand-#{$i}{
+                animation: init60Hand#{$i};
+                animation-fill-mode: forwards;
+                animation-duration: $clockValuesInitDuration;
+                animation-delay: $clockValuesInitDuration;
+            }
+        }
+        //HAND24 ROTATIONS
+        @for $i from 0 through 23 {
+            @for $j from 0 through 23{
+                @if $i != $j{
+                    @if $i > $j{
+                        .rotate24From#{$i}To#{$j} {
+                            $arc: ($i - $j) / 24;
+                            $delay: $revolutionDuration - $revolutionDuration*$arc;
+                            animation: full24RotationReverse#{$j};
+                            animation-duration: $revolutionDuration;
+                            animation-fill-mode: forwards;
+                            animation-delay: -#{$delay};
+                            animation-timing-function: linear;
+                        }
+                    }
+                    @if $i < $j{
+                        .rotate24From#{$i}To#{$j} {
+                            $arc: ($j - $i) / 24;
+                            $delay: $revolutionDuration - $revolutionDuration*$arc;
+                            animation: full24Rotation#{$j};
+                            animation-duration: $revolutionDuration;
+                            animation-fill-mode: forwards;
+                            animation-delay: -#{$delay};
+                            animation-timing-function: linear;
+                        }    
+                    }
+                }
+                @else{
+                    .rotate24From#{$i}To#{$j} {
+                        transform: rotate($i * 15deg - 90deg)
+                    }
+                }
+            }
+        }
+        //HAND ROTATIONS
+        @for $i from 0 through 59 {
+            @for $j from 0 through 59{
+                @if $i != $j{
+                    @if $i > $j{
+                        .rotateFrom#{$i}To#{$j} {
+                            $arc: ($i - $j) / 60;
+                            $delay: $revolutionDuration - $revolutionDuration*$arc;
+                            animation: fullRotationReverse#{$j};
+                            animation-duration: $revolutionDuration;
+                            animation-fill-mode: forwards;
+                            animation-delay: -#{$delay};
+                            animation-timing-function: linear;
+                        }
+                    }
+                    @if $i < $j{
+                        .rotateFrom#{$i}To#{$j} {
+                            $arc: ($j - $i) / 60;
+                            $delay: $revolutionDuration - $revolutionDuration*$arc;
+                            animation: fullRotation#{$j};
+                            animation-duration: $revolutionDuration;
+                            animation-fill-mode: forwards;
+                            animation-delay: -#{$delay};
+                            animation-timing-function: linear;
+                        }    
+                    }
+                }
+                @else{
+                    .rotateFrom#{$i}To#{$j} {
+                        transform: rotate($i * 6deg - 90deg)
+                    }
+                }
+            }
+        }
+        //ARCING
+        @for $i from 1 through 12 {
+            .time-12-#{$i}{ animation: arcTo#{$i}of12; animation-fill-mode: forwards; animation-duration: $clockValuesInitDuration;}
+        }
+
+        @for $i from 0 through 23 {
+            .time-24-#{$i}{ animation: arcTo#{$i}of24; animation-fill-mode: forwards; animation-duration: $clockValuesInitDuration;}
+        }        
+
+        @for $i from 0 through 59 {
+            .time-60-#{$i}{animation: arcTo#{$i}of60; animation-fill-mode: forwards; animation-duration: $clockValuesInitDuration;}
+        }
+
+        @keyframes arcTo1of12  { from { transform: clockTimePos12(12)} to { transform: clockTimePos12( 1)} }
+        @keyframes arcTo2of12  { from { transform: clockTimePos12(12)} to { transform: clockTimePos12( 2)} }
+        @keyframes arcTo3of12  { from { transform: clockTimePos12(12)} to { transform: clockTimePos12( 3)} }
+        @keyframes arcTo4of12  { from { transform: clockTimePos12(12)} to { transform: clockTimePos12( 4)} }
+        @keyframes arcTo5of12  { from { transform: clockTimePos12(12)} to { transform: clockTimePos12( 5)} }
+        @keyframes arcTo6of12  { from { transform: clockTimePos12(12)} to { transform: clockTimePos12( 6)} }
+        @keyframes arcTo7of12  { from { transform: clockTimePos12(12)} to { transform: clockTimePos12( 7)} }
+        @keyframes arcTo8of12  { from { transform: clockTimePos12(12)} to { transform: clockTimePos12( 8)} }
+        @keyframes arcTo9of12  { from { transform: clockTimePos12(12)} to { transform: clockTimePos12( 9)} }
+        @keyframes arcTo10of12 { from { transform: clockTimePos12(12)} to { transform: clockTimePos12(10)} }
+        @keyframes arcTo11of12 { from { transform: clockTimePos12(12)} to { transform: clockTimePos12(11)} }
+        @keyframes arcTo12of12 { from { transform: clockTimePos12(12)} to { transform: clockTimePos12(12)} }
+
+        @keyframes arcTo1of24  { from { transform: clockTimePos24(24)} to { transform: clockTimePos24( 1)} }
+        @keyframes arcTo2of24  { from { transform: clockTimePos24(24)} to { transform: clockTimePos24( 2)} }
+        @keyframes arcTo3of24  { from { transform: clockTimePos24(24)} to { transform: clockTimePos24( 3)} }
+        @keyframes arcTo4of24  { from { transform: clockTimePos24(24)} to { transform: clockTimePos24( 4)} }
+        @keyframes arcTo5of24  { from { transform: clockTimePos24(24)} to { transform: clockTimePos24( 5)} }
+        @keyframes arcTo6of24  { from { transform: clockTimePos24(24)} to { transform: clockTimePos24( 6)} }
+        @keyframes arcTo7of24  { from { transform: clockTimePos24(24)} to { transform: clockTimePos24( 7)} }
+        @keyframes arcTo8of24  { from { transform: clockTimePos24(24)} to { transform: clockTimePos24( 8)} }
+        @keyframes arcTo9of24  { from { transform: clockTimePos24(24)} to { transform: clockTimePos24( 9)} }
+        @keyframes arcTo10of24 { from { transform: clockTimePos24(24)} to { transform: clockTimePos24( 10)} }
+        @keyframes arcTo11of24 { from { transform: clockTimePos24(24)} to { transform: clockTimePos24( 11)} }
+        @keyframes arcTo12of24 { from { transform: clockTimePos24(24)} to { transform: clockTimePos24( 12)} }
+        @keyframes arcTo13of24 { from { transform: clockTimePos24(24)} to { transform: clockTimePos24( 13)} }
+        @keyframes arcTo14of24 { from { transform: clockTimePos24(24)} to { transform: clockTimePos24( 14)} }
+        @keyframes arcTo15of24 { from { transform: clockTimePos24(24)} to { transform: clockTimePos24( 15)} }
+        @keyframes arcTo16of24 { from { transform: clockTimePos24(24)} to { transform: clockTimePos24( 16)} }
+        @keyframes arcTo17of24 { from { transform: clockTimePos24(24)} to { transform: clockTimePos24( 17)} }
+        @keyframes arcTo18of24 { from { transform: clockTimePos24(24)} to { transform: clockTimePos24( 18)} }
+        @keyframes arcTo19of24 { from { transform: clockTimePos24(24)} to { transform: clockTimePos24( 19)} }
+        @keyframes arcTo20of24 { from { transform: clockTimePos24(24)} to { transform: clockTimePos24( 20)} }
+        @keyframes arcTo21of24 { from { transform: clockTimePos24(24)} to { transform: clockTimePos24( 21)} }
+        @keyframes arcTo22of24 { from { transform: clockTimePos24(24)} to { transform: clockTimePos24( 22)} }
+        @keyframes arcTo23of24 { from { transform: clockTimePos24(24)} to { transform: clockTimePos24( 23)} }
+        @keyframes arcTo0of24 { from { transform: clockTimePos24(24)} to { transform: clockTimePos24( 24)} }
+
+        @keyframes arcTo0of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 60)} }
+        @keyframes arcTo1of60  { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 1)} }
+        @keyframes arcTo1of60  { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 1)} }
+        @keyframes arcTo2of60  { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 2)} }
+        @keyframes arcTo3of60  { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 3)} }
+        @keyframes arcTo4of60  { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 4)} }
+        @keyframes arcTo5of60  { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 5)} }
+        @keyframes arcTo6of60  { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 6)} }
+        @keyframes arcTo7of60  { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 7)} }
+        @keyframes arcTo8of60  { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 8)} }
+        @keyframes arcTo9of60  { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 9)} }
+        @keyframes arcTo10of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 10)} }
+        @keyframes arcTo11of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 11)} }
+        @keyframes arcTo12of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 12)} }
+        @keyframes arcTo13of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 13)} }
+        @keyframes arcTo14of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 14)} }
+        @keyframes arcTo15of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 15)} }
+        @keyframes arcTo16of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 16)} }
+        @keyframes arcTo17of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 17)} }
+        @keyframes arcTo18of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 18)} }
+        @keyframes arcTo19of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 19)} }
+        @keyframes arcTo20of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 20)} }
+        @keyframes arcTo21of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 21)} }
+        @keyframes arcTo22of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 22)} }
+        @keyframes arcTo23of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 23)} }
+        @keyframes arcTo24of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 24)} }
+        @keyframes arcTo25of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 25)} }
+        @keyframes arcTo26of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 26)} }
+        @keyframes arcTo27of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 27)} }
+        @keyframes arcTo28of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 28)} }
+        @keyframes arcTo29of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 29)} }
+        @keyframes arcTo30of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 30)} }
+        @keyframes arcTo31of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 31)} }
+        @keyframes arcTo32of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 32)} }
+        @keyframes arcTo33of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 33)} }
+        @keyframes arcTo34of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 34)} }
+        @keyframes arcTo35of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 35)} }
+        @keyframes arcTo36of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 36)} }
+        @keyframes arcTo37of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 37)} }
+        @keyframes arcTo38of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 38)} }
+        @keyframes arcTo39of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 39)} }
+        @keyframes arcTo40of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 40)} }
+        @keyframes arcTo41of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 41)} }
+        @keyframes arcTo42of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 42)} }
+        @keyframes arcTo43of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 43)} }
+        @keyframes arcTo44of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 44)} }
+        @keyframes arcTo45of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 45)} }
+        @keyframes arcTo46of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 46)} }
+        @keyframes arcTo47of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 47)} }
+        @keyframes arcTo48of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 48)} }
+        @keyframes arcTo49of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 49)} }
+        @keyframes arcTo50of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 50)} }
+        @keyframes arcTo51of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 51)} }
+        @keyframes arcTo52of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 52)} }
+        @keyframes arcTo53of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 53)} }
+        @keyframes arcTo54of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 54)} }
+        @keyframes arcTo55of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 55)} }
+        @keyframes arcTo56of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 56)} }
+        @keyframes arcTo57of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 57)} }
+        @keyframes arcTo58of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 58)} }
+        @keyframes arcTo59of60 { from { transform: clockTimePos60(60)} to { transform: clockTimePos60( 59)} }
+    }
+}

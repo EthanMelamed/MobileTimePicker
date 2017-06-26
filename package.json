@@ -1,0 +1,40 @@
+{
+  "name": "mobile-time-picker",
+  "version": "1.0.0",
+  "description": "Angular2 datetime picker for touch devices",
+  "module": "index.js",
+  "typings": "index.d.ts",
+  "keywords": [
+    "angular",
+    "angular2",
+    "angular 2",
+    "date",
+    "time",
+    "datetime"
+  ],
+  "author": "Ethan Melamed",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EthanMelamed/MobileTimePicker.git"
+  },
+  "peerDependencies": {
+    "@angular/common": "4.2.3",
+    "@angular/compiler": "4.2.3",
+    "@angular/compiler-cli": "4.2.3",
+    "@angular/core": "4.2.3",
+    "@angular/forms": "4.2.3",
+    "@angular/http": "4.2.3",
+    "@angular/material": "^2.0.0-beta.7",
+    "@angular/platform-browser": "4.2.3",
+    "@angular/platform-browser-dynamic": "4.2.3",
+    "@ngx-translate/core": "^6.0.1",
+    "@ngx-translate/http-loader": "0.0.3",
+    "@types/lodash": "ts2.0",
+    "@types/node": "^7.0.5",
+    "hammerjs": "2.0.8",
+    "rxjs": "^5.0.1",
+    "sw-toolbox": "3.4.0",
+    "zone.js": "^0.8.12"
+  }
+}
