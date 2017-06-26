@@ -5,7 +5,8 @@
   "scripts": {
     "transpile": "ngc",
     "minify": "uglifyjs dist/bundles/amazing.umd.js --screw-ie8 --compress --mangle --comments --output dist/bundles/amazing.umd.min.js",
-    "build": "npm run transpile"
+    "build": "npm run transpile",
+    "gulp": "gulp build"
   },
   "author": "Ethan Melamed",
   "license": "ISC",
@@ -33,9 +34,22 @@
     "@angular/cli": "^1.0.0",
     "@angular/compiler-cli": "^2.3.1",
     "@types/hammerjs": "2.0.34",
-    "typescript": "2.2.1",
     "@types/lodash": "4.14.50",
-    "@types/node": "6.0.65"
+    "@types/node": "6.0.65",
+    "child-process": "^1.0.2",
+    "gulp": "^3.9.1",
+    "gulp-inline-ng2-template": "^4.0.0",
+    "gulp-install": "^1.1.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-typescript": "^3.1.7",
+    "run-sequence": "^1.2.2",
+    "ts-node": "^3.1.0",
+    "typescript": "2.2.1",
+    "typescript-node": "^0.1.3",
+    "typescript-register": "^1.1.0",
+    "typescript-require": "^0.2.9-1"
   },
   "typings": "./index.d.ts"
 }

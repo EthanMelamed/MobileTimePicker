@@ -141,10 +141,11 @@ var TimePickerComponent = (function () {
 export { TimePickerComponent };
 TimePickerComponent.decorators = [
     { type: Component, args: [{
+                moduleId: module.id.toString(),
                 selector: 'epic-time-picker',
-                templateUrl: './time-picker.component.html',
+                templateUrl: '../node_modules/mobile-time-picker/src/time-picker.component.html',
                 styleUrls: [
-                    './time-picker.component.scss',
+                    '../node_modules/mobile-time-picker/src/time-picker.component.css',
                 ]
             },] },
 ];

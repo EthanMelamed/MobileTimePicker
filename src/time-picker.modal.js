@@ -473,10 +473,10 @@ var TimePickerModal = (function () {
 export { TimePickerModal };
 TimePickerModal.decorators = [
     { type: Component, args: [{
-                templateUrl: './time-picker.modal.html',
+                templateUrl: '../node_modules/mobile-time-picker/src/time-picker.modal.html',
                 styleUrls: [
-                    './time-picker.modal.scss',
-                    './time-picker-rotation-keyframes.modal.scss'
+                    '../node_modules/mobile-time-picker/src/time-picker.modal.css',
+                    '../node_modules/mobile-time-picker/src/time-picker-rotation-keyframes.modal.css'
                 ]
             },] },
 ];

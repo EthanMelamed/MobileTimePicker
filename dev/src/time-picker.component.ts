@@ -7,11 +7,11 @@
     import { Subscription } from "rxjs/Subscription";
     import { Subject } from "rxjs/Subject";
 
-
     export enum DisplayModes { LOCAL12 = 0, LOCAL24 = 1, UTC = 2 }
 
 /* TimePickerComponent */
     @Component({
+        moduleId: module.id,
         selector: 'epic-time-picker',
         templateUrl: './time-picker.component.html',
         styleUrls: [
