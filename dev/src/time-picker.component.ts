@@ -11,7 +11,6 @@
 
 /* TimePickerComponent */
     @Component({
-        moduleId: module.id,
         selector: 'epic-time-picker',
         templateUrl: './time-picker.component.html',
         styleUrls: [

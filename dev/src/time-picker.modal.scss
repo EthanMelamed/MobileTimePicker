@@ -232,7 +232,7 @@ $selectedColor: darkcyan;
         }
         //TICKS
         @for $i from 0 through 59 {
-            .tick-#{$i}{ transform: rotate($i * 6deg - 90deg); }
+            .tick-#{$i}{ transform: rotate($i * 6deg - 90deg); backface-visibility: hidden;}
         }
         //INITHAND
         @for $i from 1 through 12 {
