@@ -9,8 +9,8 @@
     import { EpicLocalTimePipe } from './epic-local-time.pipe';
 
 //COMPONENTS
-  import { TimePickerComponent } from './time-picker.component';
-  import { TimePickerModal } from './time-picker.modal';
+    import { TimePickerComponent } from './time-picker.component';
+    import { TimePickerModal } from './time-picker.modal';
 
 
 //NGX-TRANSLATE

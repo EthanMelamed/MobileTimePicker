@@ -5,7 +5,7 @@
   "scripts": {
     "transpile": "ngc",
     "minify": "uglifyjs dist/bundles/amazing.umd.js --screw-ie8 --compress --mangle --comments --output dist/bundles/amazing.umd.min.js",
-    "build": "npm run transpile",
+    "build": "npm run transpile && npm run gulp",
     "gulp": "gulp build"
   },
   "author": "Ethan Melamed",
@@ -43,6 +43,7 @@
     "gulp-minify-css": "^1.2.4",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.0",
+    "gulp-string-replace": "^0.4.0",
     "gulp-typescript": "^3.1.7",
     "run-sequence": "^1.2.2",
     "ts-node": "^3.1.0",
