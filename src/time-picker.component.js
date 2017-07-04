@@ -120,9 +120,9 @@ var TimePickerComponent = (function () {
                 type: this.type
             })
         };
-        console.log(data.config);
         var modal = this.dialog.open(TimePickerModal, {
-            data: data
+            data: data,
+            disableClose: true
         });
         this.subscriptions.push(modal.afterClosed().subscribe(function (result) {
             //EMIT THE RESULT IF THE OK BUTTON WAS CLICKED

@@ -24,10 +24,10 @@ var EpicUTCTimePipe = (function () {
     EpicUTCTimePipe.prototype.parse = function (date, format) {
         var result = format;
         result = result.replace("yyyy", this.addZero(date.getUTCFullYear()));
-        result = result.replace("hh", this.addZero(date.getUTCHours()));
+        result = result.replace("MM", this.addZero(date.getUTCMonth() + 1));
         result = result.replace("dd", this.addZero(date.getUTCDate()));
-        result = result.replace("MM", this.addZero(date.getUTCMinutes()));
-        result = result.replace("mm", this.addZero(date.getUTCMonth() + 1));
+        result = result.replace("hh", this.addZero(date.getUTCHours()));
+        result = result.replace("mm", this.addZero(date.getUTCMinutes()));
         return result;
     };
     return EpicUTCTimePipe;
