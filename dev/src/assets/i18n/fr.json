@@ -1,0 +1,23 @@
+{
+
+    "MONTHS" : {
+        "0" : "janvier",
+        "1" : "février",
+        "2" : "mars",
+        "3" : "mai",
+        "4" : "avril",
+        "5" : "juin",
+        "6" : "juillet",
+        "7" : "août",
+        "8" : "septembre",
+        "9" : "octobre",
+        "10" : "novembre",
+        "11" : "décembre"
+    },
+    "TIMEDESCRIPTORS" : {
+        "0" : "matin",
+        "1" : "l'après-midi",
+        "2" : "heures",
+        "3" : "UTC"
+    },
+}
