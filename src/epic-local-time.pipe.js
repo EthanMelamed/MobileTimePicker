@@ -23,18 +23,11 @@ var EpicLocalTimePipe = (function () {
      */
     EpicLocalTimePipe.prototype.parse = function (date, format) {
         var result = format;
-        var yyyy = new RegExp('yyyy');
-        result = result.replace("yyyy", this.addZero(date.getFullYear()));
-        var hh = new RegExp('hh');
-        result = result.replace("hh", this.addZero(date.getHours()));
-        var dd = new RegExp('dd');
+        result = result.replace("yyyy", date.getFullYear().toString());
+        result = result.replace("MM", this.addZero(date.getMonth() + 1));
         result = result.replace("dd", this.addZero(date.getDate()));
-        var h = new RegExp('h');
-        result = result.replace("h", date.getHours().toString());
-        var mm = new RegExp('mm');
+        result = result.replace("hh", this.addZero(date.getHours()));
         result = result.replace("mm", this.addZero(date.getMinutes()));
-        var m = new RegExp('m');
-        result = result.replace("m", this.addZero(date.getMonth() + 1));
         return result;
     };
     return EpicLocalTimePipe;

@@ -123,7 +123,6 @@
                     type: this.type
                 })
             };
-            console.log(data.config);
             let modal = this.dialog.open(TimePickerModal, {
                 data: data,
                 disableClose: true

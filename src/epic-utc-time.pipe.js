@@ -23,18 +23,11 @@ var EpicUTCTimePipe = (function () {
      */
     EpicUTCTimePipe.prototype.parse = function (date, format) {
         var result = format;
-        var yyyy = new RegExp('yyyy');
         result = result.replace("yyyy", this.addZero(date.getUTCFullYear()));
-        var hh = new RegExp('hh');
         result = result.replace("hh", this.addZero(date.getUTCHours()));
-        var dd = new RegExp('dd');
         result = result.replace("dd", this.addZero(date.getUTCDate()));
-        var h = new RegExp('h');
-        result = result.replace("h", date.getUTCHours().toString());
-        var mm = new RegExp('mm');
-        result = result.replace("mm", this.addZero(date.getUTCMinutes()));
-        var m = new RegExp('m');
-        result = result.replace("m", this.addZero(date.getUTCMonth() + 1));
+        result = result.replace("MM", this.addZero(date.getUTCMinutes()));
+        result = result.replace("mm", this.addZero(date.getUTCMonth() + 1));
         return result;
     };
     return EpicUTCTimePipe;
