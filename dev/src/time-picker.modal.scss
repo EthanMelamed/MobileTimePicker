@@ -28,6 +28,7 @@ $selectedColor: darkcyan;
         @return rotate( ($time - 5) * 6deg + 300deg) translateX($clockSize/2 - 1em) rotate(($time - 5) * -6deg - 300deg);
     }
 }
+
 :host{
     .time-picker-content{
         overflow: hidden;
@@ -47,11 +48,7 @@ $selectedColor: darkcyan;
         }
     }
     .month-picker {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        height: $clockSize;
+        height: calc($clockSize/4);
         width: $clockSize;
         font-size: $numberSize;
         .month-button-wrapper {
@@ -68,7 +65,7 @@ $selectedColor: darkcyan;
                 width: 100%;
                 font-size: 1em;
                 padding: 0;
-
+                background-color: #fff;
             }
         }
     }
@@ -114,9 +111,6 @@ $selectedColor: darkcyan;
                 text-align:center;
                 padding: 0;
                 border: 1px solid grey;
-                display: flex;
-                justify-content: center;
-                flex-direction: column;
                 align-items: center;
                 .number-pad-button{
                     height: 100%;
@@ -135,13 +129,13 @@ $selectedColor: darkcyan;
     .clock{
         border-radius: 50%;
         background-color: #F5F5F5;
-        padding-bottom: calc(100%);
         width: $clockSize;
         min-width: $clockSize;
         min-height: $clockSize;
         max-width: 95%;
         position: relative;
         font-size: $numberSize;
+        padding-bottom: 100%;
         .hand-pointer{
             position: absolute;
             left: 100%;
